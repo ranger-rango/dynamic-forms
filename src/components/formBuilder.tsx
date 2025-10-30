@@ -14,7 +14,9 @@ export default function FormBuilder({ formSchema } : FormBuilderProps)
     )
     
     const onValid = (data : FormValues) => 
-    {}
+    {
+        console.log(data)
+    }
 
     const formFields : any = Object.values(formSchema.fields);
     
@@ -22,7 +24,7 @@ export default function FormBuilder({ formSchema } : FormBuilderProps)
         <div>
             <h3>{ formSchema.meta.title }</h3>
             <p> { formSchema.meta.subtitle } </p>
-            <form action="" method="post" id={formSchema.id}>
+            <form onSubmit={handleSubmit(onValid)} method="post" id={formSchema.id}>
                 {
                     formFields.map((field : any) => 
                     {
@@ -53,8 +55,8 @@ export default function FormBuilder({ formSchema } : FormBuilderProps)
                                     { field.placeholder && <option value=""> { field.placeholder } </option> }
                                     { field.props.data.map((opt : any, index : number) => 
                                     {
-                                        const value = typeof opt === "object" ? opt.value ?? opt.label ?? opt.toString() : opt;
-                                        const label = typeof opt === "object" ? opt.label ?? opt.value ?? opt.toString() : opt;
+                                        const value : any = typeof opt === "object" ? opt.value ?? opt.label ?? opt.toString() : opt;
+                                        const label : any = typeof opt === "object" ? opt.label ?? opt.value ?? opt.toString() : opt;
                                         return ( <option key={index} value={value}> {label} </option> );
                                     }
                                     ) }
