@@ -64,6 +64,7 @@ export default function FormBuilder({ formSchema } : FormBuilderProps)
                                 })}
                             </select> 
                         }
+                        { field.renderer === "switch" && <input type="range" name={ field.id } id={ field.id } min={0} max={1} defaultValue={0} /> }
                         { field.renderer === "file" && <input type="file" id={ field.id } {...register(field.id, fieldRules)} /> }
                         { (errors[field.id] as FieldError | undefined)?.message && <p className="form-errors">{ (errors[field.id] as FieldError)?.message }</p> }
                     </div>
